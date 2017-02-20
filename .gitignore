@@ -1,0 +1,7 @@
+backend/target/
+backend/.settings/
+backend/.project
+backend/.classpath
+.metadata/
+RemoteSystemsTempFiles/
+.recommenders/

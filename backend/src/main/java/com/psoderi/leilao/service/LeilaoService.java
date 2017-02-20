@@ -1,6 +1,8 @@
 package com.psoderi.leilao.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -58,6 +60,7 @@ public class LeilaoService {
 	
 	@Transactional
 	public void darLance(Integer idItem, Double valor) throws Exception{
+
 		Item item = itemDAO.recuperaItemPeloID(idItem);
 		
 		if(valor == null){
@@ -67,6 +70,17 @@ public class LeilaoService {
 				throw new LanceException(ErrorCode.LANCE_MENOR_VALOR_ATUAL);
 			}
 			item.incrementaValorAtualComLance(valor);
+		}
+		
+		
+		Calendar cal = Calendar.getInstance();		
+		Date agora = new Date();
+		
+	    cal.add(Calendar.MINUTE, -1);
+	    if(agora.before(item.getDataFechamento()) && agora.after(cal.getTime())){
+	    	cal.add(Calendar.MINUTE, 1);
+	    	cal.add(Calendar.SECOND, 30);
+	    	item.setDataFechamento(cal.getTime());
 		}
 		
 		Lance lance = new Lance(valor);
