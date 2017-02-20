@@ -1,0 +1,38 @@
+<br></br>
+<p ng-show="mensagem.length" class="alert alert-info">
+	{{mensagem}}
+</p>
+<br></br>
+<div class="row">
+	<div class="col-md-12">
+		<form>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<a href="/itens/cadastro" class="btn btn-primary" type="button">
+						Novo Item
+					</a>
+				</span>
+				<input class="form-control" placeholder="filtrar Itens cadastrados pelo nome" 
+					ng-model="filtro" ng-model-options="{ debounce: 500 }">
+		</form>
+	</div> <!-- fim col-md-12 -->
+</div> <!-- fim row -->
+<br></br>
+<div class="row">
+    <meu-painel class="col-md-3 painel-animado" ng-repeat="item in itens.result | filter: filtro" titulo="{{item.descricao}}">
+		
+			<div class="panel-body">
+				<div>
+					<h3 class="panel-title text-center">Oferta mais elevada: {{item.valorAtual | number : 2}}</h3>
+					<h3 class="panel-title text-center">Valor Base: {{item.valorInicial | number : 2}}</h3>
+					<h3 class="panel-title text-center">Incremento omissão: {{item.valorDefaultIncremento | number : 2}}</h3>
+					<h3 class="panel-title text-center">Estado: {{item.status}}</h3>
+			</div>
+			</div>
+		
+		<a class="btn btn-primary btn-block" href="/lance/{{item}}" ng-disabled="item.status == 'Fechado'">
+			Dar o lance
+		</a>
+		<!-- <meu-botao-perigo nome="Remover" acao="remover(item)">Remover</meu-botao-perigo> -->
+    </meu-painel>
+</div>

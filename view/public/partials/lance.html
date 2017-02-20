@@ -1,0 +1,16 @@
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Valor do Lance:</label>
+			<input name="valorInicial" class="form-control" ng-model="lance.valorLance"  placeholder="99.99">
+		</div>
+		<h4>Se você não preencher o valor do lance, o lance será dado com o valor default do incremento somado ao valor atual do leilao: {{valorLance | number : 2}}</h4>
+		<button type="submit" class="btn btn-primary">
+			Confirmar Lance
+		</button>
+		<a href="/" class="btn btn-primary">Voltar</a>
+		<hr>
+	</div>
+</form> 	
